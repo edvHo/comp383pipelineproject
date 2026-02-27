@@ -26,7 +26,7 @@ git clone https://github.com/edvHo/comp383pipelineproject.git
 ```
 cd comp383pipelineproject
 ```
-* (OPTIONAL) Create the following directories within the cloned repository to set up input files (the sample_data directory and contents should already be present after cloning the repo).
+* (THE FOLLOWING STEPS ARE OPTIONAL) Create the following directories within the cloned repository to set up input files (the sample_data directory and contents should already be present after cloning the repo).
 ```
 mkdir -p data
 ```
