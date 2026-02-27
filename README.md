@@ -2,7 +2,7 @@
 
 ## Description
 
-This project utilizes Snakemake to analyze Human Cytomegalovirus (HCMV; Human herpesvirus 5) transcriptomes at 2 and 6 days post-infection (dpi) from two patient donors.
+This project utilizes Snakemake to analyze Human Cytomegalovirus (HCMV; Human herpesvirus 5) transcriptomes at 2 and 6 days post-infection (dpi) from two patient donors. The HCMV reference genome (GCF_000845245.1) is downloaded from NCBI and indexed using Bowtie2, and paired-end reads are aligned to the reference genome. Filtered reads are assembled using SPAdes (k-mer size = 99). The number of contigs greater than 1000 base pairs and the total number of base pairs contained in all contigs are calculated. The longest contig from each assembly is extracted and used as a query sequence in a BLAST+ search against a locally constructed database of Betaherpesvirinae genomes.
 
 ### Software
 * [Snakemake](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html#step-1-mapping-reads)
