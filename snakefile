@@ -150,23 +150,30 @@ rule longest_contig:
 # Create a nucleotide BLAST database
 # from the HCMV reference genome.
 rule build_betaherpes_db:
-    input:
-        "reference/hcmv.fasta"
     output:
         "betaherpes_db/betaherpes.nsq"
     shell:
         """
-        # Create directory for BLAST database files
         mkdir -p betaherpes_db
 
-        # Convert FASTA file into BLAST nucleotide database
-        # Generates .nsq, .nin, .nhr index files
-        makeblastdb \
-          -in {input} \
-          -dbtype nucl \
-          -out betaherpes_db/betaherpes
-        """
+        # Download Betaherpesvirinae viral genomes
+        datasets download virus genome taxon Betaherpesvirinae \
+            --include genome \
+            --filename betaherpes_db/betaherpes.zip
 
+        # Unzip archive
+        unzip -o betaherpes_db/betaherpes.zip -d betaherpes_db/
+
+        # Concatenate all FASTA files
+        find betaherpes_db/ncbi_dataset/data -name "*.fna" \
+            -exec cat {{}} + > betaherpes_db/betaherpes.fasta
+
+        # Build BLAST database
+        makeblastdb \
+            -in betaherpes_db/betaherpes.fasta \
+            -dbtype nucl \
+            -out betaherpes_db/betaherpes
+        """
 
 # STEP 5C: Run blastn
 
